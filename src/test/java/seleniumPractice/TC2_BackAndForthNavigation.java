@@ -1,8 +1,45 @@
 package seleniumPractice;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import seleniumPractice.utility.WebDriverFactory;
+
 public class TC2_BackAndForthNavigation {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
+
+        WebDriver driver = WebDriverFactory.getDriver("chrome");
+        driver.get("https://practice.cydeo.com");
+        driver.manage().window().maximize();
+        driver.findElement(By.linkText("A/B Testing")).click();
+
+        Thread.sleep(1500);
+
+        //Title verification:
+        String expectedTitle = "No A/B Test";
+        String actualTitle = driver.getTitle();
+        System.out.println("expectedTitle = " + expectedTitle);
+        System.out.println("actualTitle = " + actualTitle);
+        if(actualTitle.equals(expectedTitle)){
+            System.out.println("Title verification PASSED!");
+        }else{
+            System.out.println("Title verification FAILED!");
+        }
+
+        Thread.sleep(1500);
+
+        driver.navigate().back();
+
+        //Title of homepage verification:
+        String expectedHPTitle = "Practice";
+        String actualHPTitle = driver.getTitle();
+        System.out.println("expectedHPTitle = " + expectedHPTitle);
+        System.out.println("actualHPTitle = " + actualHPTitle);
+        if(actualHPTitle.equals(expectedHPTitle)){
+            System.out.println("Home page title verification PASSED!");
+        }else {
+            System.out.println("Home page title verification PASSED!");
+        }
 
     }
 
